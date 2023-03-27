@@ -36,7 +36,7 @@ const Todo = () => {
                 </figure>
                 <div className="addItems">
                     <input type="text" placeholder="📃 Add Items..." className="form-control" value={inputdata} onChange={e=>setInputdata(e.target.value)}/>
-                    <i className="fa-solid fa-plus add-btn" onClick={addItem}></i>
+                    <i className="fa fa-plus add-btn" onClick={addItem}></i>
                 </div>
                 <div className="showItems">
                     {
@@ -44,8 +44,8 @@ const Todo = () => {
                             return(<div className="eachItem" key={index}>
                                         <h3>{curElm.name}</h3>
                                         <div className="todo-btn">
-                                        <i class="fa-regular fa-pen-to-square add-btn"></i>
-                                        <i class="fa-solid fa-trash add-btn" onClick={()=>{deleteItem(curElm.id)}}></i>
+                                        <i class="far fa-edit add-btn"></i>
+                                        <i class="far fa-trash-alt add-btn" onClick={()=>{deleteItem(curElm.id)}}></i>
                                         </div>
                                     </div>)
                         })
@@ -53,7 +53,7 @@ const Todo = () => {
                     
                 </div>
                 <div className="showItems">
-                    <button className="btn effect04" data-sm-link-text="Remove All" onClick={removeAll}>Check list</button>
+                    <button className="btn" data-sm-link-text="Remove All" onClick={removeAll}>Remove All</button>
                 </div>
             </div>
         </div>
