@@ -1,13 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Todo.css";
+
+const getLocalData = () =>{
+    const list = localStorage.getItem("myList");
+
+    if(list){
+        return JSON.parse(list);
+    }
+    else{
+        return [];
+    }
+}
 const Todo = () => {
 
     const [inputdata, setInputdata] = useState("");
-    const [items, setItems] = useState([]);
+    const [items, setItems] = useState(getLocalData());
 
     const addItem = () => {
         if(!inputdata){
-            alert("sdfs");
+            alert("!List is Empty!");
         }
         else{
             const newItemData ={
@@ -27,6 +38,10 @@ const Todo = () => {
     const removeAll = () =>{
         setItems([]);
     }
+
+    useEffect(()=>{
+        localStorage.setItem("myList",JSON.stringify(items))
+    },[items])
     return(<div>
         <div className="main-div">
             <div className="child-div">
