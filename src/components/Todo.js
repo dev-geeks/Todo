@@ -15,12 +15,23 @@ const Todo = () => {
 
     const [inputdata, setInputdata] = useState("");
     const [items, setItems] = useState(getLocalData());
-
+    const [edit, setEdit] = useState("");
+    const [btn, setBtn] = useState(false);
     const addItem = () => {
         if(!inputdata){
             alert("!List is Empty!");
         }
-        else{
+        // else if(inputdata && btn){
+        //     setItems(
+        //         items.map((curElm)=>{
+        //             if(curElm.id === edit){
+        //                 return{ ...curElm, name: inputdata }
+        //             }
+        //             return curElm;
+        //         })
+        //     )
+        // }
+        else if(inputdata && btn){
             const newItemData ={
                 id: new Date().getTime().toString(),
                 name: inputdata
@@ -42,6 +53,15 @@ const Todo = () => {
     useEffect(()=>{
         localStorage.setItem("myList",JSON.stringify(items))
     },[items])
+
+    const editItem = (id) =>{
+        const item_todo_edit = items.find((curElm)=>{
+            return curElm.id === id;
+        })
+        setInputdata(item_todo_edit.name);
+        setEdit(id);
+        setBtn(true);
+    }
     return(<div>
         <div className="main-div">
             <div className="child-div">
@@ -51,7 +71,11 @@ const Todo = () => {
                 </figure>
                 <div className="addItems">
                     <input type="text" placeholder="📃 Add Items..." className="form-control" value={inputdata} onChange={e=>setInputdata(e.target.value)}/>
-                    <i className="fa fa-plus add-btn" onClick={addItem}></i>
+                    {btn ? (
+                        <i className="far fa-edit add-btn" onClick={addItem}></i>
+                        ) : (
+                        <i className="fa fa-plus add-btn" onClick={addItem}></i>
+                    )}
                 </div>
                 <div className="showItems">
                     {
@@ -59,7 +83,7 @@ const Todo = () => {
                             return(<div className="eachItem" key={index}>
                                         <h3>{curElm.name}</h3>
                                         <div className="todo-btn">
-                                        <i class="far fa-edit add-btn"></i>
+                                        <i class="far fa-edit add-btn" onClick={()=>{editItem(curElm.id)}}></i>
                                         <i class="far fa-trash-alt add-btn" onClick={()=>{deleteItem(curElm.id)}}></i>
                                         </div>
                                     </div>)
