@@ -21,17 +21,20 @@ const Todo = () => {
         if(!inputdata){
             alert("!List is Empty!");
         }
-        // else if(inputdata && btn){
-        //     setItems(
-        //         items.map((curElm)=>{
-        //             if(curElm.id === edit){
-        //                 return{ ...curElm, name: inputdata }
-        //             }
-        //             return curElm;
-        //         })
-        //     )
-        // }
         else if(inputdata && btn){
+            setItems(
+                items.map((curElm)=>{
+                    if(curElm.id === edit){
+                        return{ ...curElm, name: inputdata }
+                    }
+                    return curElm;
+                })
+            );
+            setInputdata("");
+            setEdit();
+            setBtn(false);
+        }
+        else{
             const newItemData ={
                 id: new Date().getTime().toString(),
                 name: inputdata
