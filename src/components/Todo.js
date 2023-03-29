@@ -91,8 +91,7 @@ const Todo = () => {
                                         </div>
                                     </div>)
                         })
-                    }
-                    
+                    }     
                 </div>
                 <div className="showItems">
                     <button className="btn" data-sm-link-text="Remove All" onClick={removeAll}>Remove All</button>
